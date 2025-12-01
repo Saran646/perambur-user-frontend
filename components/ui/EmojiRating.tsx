@@ -17,9 +17,9 @@ export default function EmojiRating({ rating, onChange, size = 'md', readOnly = 
     ]
 
     const sizeClasses = {
-        sm: 'text-2xl gap-2',
-        md: 'text-4xl gap-4',
-        lg: 'text-5xl gap-6',
+        sm: 'text-xl sm:text-2xl gap-1 sm:gap-2',
+        md: 'text-2xl sm:text-4xl gap-2 sm:gap-4',
+        lg: 'text-3xl sm:text-5xl gap-2 sm:gap-6',
     }
 
     return (
