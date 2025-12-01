@@ -47,7 +47,7 @@ export default function BranchReviewsPage() {
 
     const fetchData = async () => {
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000'
+            const apiUrl = 'https://perambur-backend.onrender.com'
 
             // Fetch branch details
             const branchRes = await fetch(`${apiUrl}/api/branches/${branchId}`)
@@ -133,8 +133,8 @@ export default function BranchReviewsPage() {
                                             {review.guestName || review.user?.name || 'Anonymous'}
                                         </h3>
                                         <span className={`px-2 py-0.5 rounded text-xs font-medium ${review.visitType === 'DINE_IN' ? 'bg-blue-100 text-blue-800' :
-                                                review.visitType === 'TAKEAWAY' ? 'bg-orange-100 text-orange-800' :
-                                                    'bg-green-100 text-green-800'
+                                            review.visitType === 'TAKEAWAY' ? 'bg-orange-100 text-orange-800' :
+                                                'bg-green-100 text-green-800'
                                             }`}>
                                             {review.visitType === 'DINE_IN' ? '🍽️ Dine-in' :
                                                 review.visitType === 'TAKEAWAY' ? '🥡 Takeaway' :
