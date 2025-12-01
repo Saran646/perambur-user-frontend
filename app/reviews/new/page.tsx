@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import EmojiRating from '@/components/ui/EmojiRating'
 import Link from 'next/link'
@@ -12,7 +12,7 @@ interface Branch {
     name: string
 }
 
-export default function NewReviewPage() {
+function ReviewForm() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const branchIdParam = searchParams.get('branchId')
@@ -348,5 +348,13 @@ export default function NewReviewPage() {
                 </form>
             </div >
         </div >
+    )
+}
+
+export default function NewReviewPage() {
+    return (
+        <Suspense fallback={<div className="container-custom py-12 text-center">Loading...</div>}>
+            <ReviewForm />
+        </Suspense>
     )
 }

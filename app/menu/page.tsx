@@ -5,8 +5,19 @@ import { api } from '@/lib/api'
 
 const CATEGORIES = ['SWEETS', 'SNACKS', 'SAVOURIES', 'COOKIES', 'PODI', 'THOKKU', 'PICKLE', 'GIFT_HAMPER']
 
+interface Dish {
+    id: string
+    name: string
+    price: number
+    description: string
+    category: string
+    branch?: {
+        name: string
+    }
+}
+
 export default function MenuPage() {
-    const [dishes, setDishes] = useState<any[]>([])
+    const [dishes, setDishes] = useState<Dish[]>([])
     const [loading, setLoading] = useState(true)
     const [selectedCategory, setSelectedCategory] = useState<string>('')
 
@@ -33,7 +44,7 @@ export default function MenuPage() {
         }
         acc[dish.category].push(dish)
         return acc
-    }, {} as Record<string, any[]>)
+    }, {} as Record<string, Dish[]>)
 
     if (loading) {
         return (
@@ -71,13 +82,13 @@ export default function MenuPage() {
 
             {/* Menu Items */}
             <div className="space-y-12">
-                {(Object.entries(groupedDishes) as [string, any[]][]).map(([category, items]) => (
+                {Object.entries(groupedDishes).map(([category, items]) => (
                     <div key={category}>
                         <h2 className="text-2xl font-bold mb-6 text-orange-900 border-b-2 border-orange-200 pb-2">
                             {category.replace('_', ' ')}
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {items.map((dish: any) => (
+                            {items.map((dish) => (
                                 <div key={dish.id} className="card p-4">
                                     <div className="flex justify-between items-start mb-2">
                                         <h3 className="font-semibold text-lg">{dish.name}</h3>
