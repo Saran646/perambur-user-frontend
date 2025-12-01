@@ -71,7 +71,7 @@ export default function MenuPage() {
 
             {/* Menu Items */}
             <div className="space-y-12">
-                {Object.entries(groupedDishes).map(([category, items]: [string, any[]]) => (
+                {(Object.entries(groupedDishes) as [string, any[]][]).map(([category, items]) => (
                     <div key={category}>
                         <h2 className="text-2xl font-bold mb-6 text-orange-900 border-b-2 border-orange-200 pb-2">
                             {category.replace('_', ' ')}
