@@ -128,75 +128,97 @@ function ReviewForm() {
         }
     }
 
+
     if (success) {
         return (
-            <div className="container-custom py-12">
-                <div className="max-w-2xl mx-auto card p-8 text-center">
-                    <div className="text-6xl mb-4">✅</div>
-                    <h2 className="text-2xl font-bold mb-2">Review Submitted!</h2>
-                    <p className="text-gray-600">Thank you for sharing your experience with us.</p>
+            <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 py-12">
+                <div className="container-custom">
+                    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 text-center border-4 border-orange-200">
+                        <div className="text-6xl mb-4 animate-bounce">✅🍽️</div>
+                        <h2 className="text-2xl font-bold mb-2 text-orange-900">Review Submitted!</h2>
+                        <p className="text-gray-600">Thank you for sharing your experience with us! 🙏</p>
+                        <div className="mt-4 text-4xl">🍛 🍕 🍜 🥘 🍱</div>
+                    </div>
                 </div>
             </div>
         )
     }
 
     return (
-        <div className="container-custom py-12">
+        <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 relative overflow-hidden">
+            {/* Food Icons Background Decoration */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none">
+                <div className="text-9xl absolute top-10 left-10 transform rotate-12">🍛</div>
+                <div className="text-8xl absolute top-40 right-20 transform -rotate-12">🍕</div>
+                <div className="text-7xl absolute bottom-20 left-1/4 transform rotate-45">🍜</div>
+                <div className="text-9xl absolute bottom-40 right-10 transform -rotate-45">🥘</div>
+                <div className="text-8xl absolute top-1/2 left-10 transform rotate-12">🍱</div>
+            </div>
+
             <OrderTypeModal
                 isOpen={showOrderTypeModal}
                 onSelect={handleOrderTypeSelect}
             />
 
-            <div className={`max-w-3xl mx-auto transition-opacity duration-300 ${showOrderTypeModal ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-                <div className="flex justify-between items-start mb-2">
-                    <h1 className="mb-0">Write a Review</h1>
-                    <button
-                        onClick={() => setShowOrderTypeModal(true)}
-                        className="text-sm text-orange-600 font-medium hover:underline bg-orange-50 px-3 py-1 rounded-full"
-                    >
-                        {formData.visitType === 'DELIVERY' ? '🛵 Delivery' : '🍽️ Dine-in / Takeaway'} (Change)
-                    </button>
-                </div>
+            <div className="container-custom py-12 relative z-10">
+                <div className={`max-w-3xl mx-auto transition-opacity duration-300 ${showOrderTypeModal ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                    <div className="flex justify-between items-start mb-6">
+                        <div>
+                            <h1 className="mb-2 text-orange-900 flex items-center gap-2">
+                                <span className="text-4xl">📝</span>
+                                Write a Review
+                            </h1>
+                            <p className="text-gray-600">Share your delicious experience! 🍴</p>
+                        </div>
+                        <button
+                            onClick={() => setShowOrderTypeModal(true)}
+                            className="text-sm text-orange-600 font-medium hover:underline bg-orange-100 px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all"
+                        >
+                            {formData.visitType === 'DELIVERY' ? '🛵 Delivery' : '🍽️ Dine-in / Takeaway'} (Change)
+                        </button>
+                    </div>
 
-                {formData.visitType !== 'DELIVERY' && (
-                    <div className="flex justify-center mb-8">
-                        <div className="bg-gray-100 p-1 rounded-lg inline-flex">
-                            <button
-                                type="button"
-                                onClick={() => setFormData({ ...formData, visitType: 'DINE_IN' })}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${formData.visitType === 'DINE_IN'
-                                    ? 'bg-white text-orange-600 shadow-sm'
-                                    : 'text-gray-600 hover:text-gray-900'
-                                    }`}
-                            >
-                                🍽️ Dine-in
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setFormData({ ...formData, visitType: 'TAKEAWAY' })}
-                                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${formData.visitType === 'TAKEAWAY'
-                                    ? 'bg-white text-orange-600 shadow-sm'
-                                    : 'text-gray-600 hover:text-gray-900'
-                                    }`}
-                            >
-                                🥡 Takeaway
-                            </button>
+                    {formData.visitType !== 'DELIVERY' && (
+                        <div className="flex justify-center mb-8">
+                            <div className="bg-gray-100 p-1 rounded-lg inline-flex">
+                                <button
+                                    type="button"
+                                    onClick={() => setFormData({ ...formData, visitType: 'DINE_IN' })}
+                                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${formData.visitType === 'DINE_IN'
+                                        ? 'bg-white text-orange-600 shadow-sm'
+                                        : 'text-gray-600 hover:text-gray-900'
+                                        }`}
+                                >
+                                    🍽️ Dine-in
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setFormData({ ...formData, visitType: 'TAKEAWAY' })}
+                                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${formData.visitType === 'TAKEAWAY'
+                                        ? 'bg-white text-orange-600 shadow-sm'
+                                        : 'text-gray-600 hover:text-gray-900'
+                                        }`}
+                                >
+                                    🥡 Takeaway
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
-                <p className="text-gray-600 mb-8">Share your experience and help others discover great food!</p>
 
                 {error && (
-                    <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-                        {error}
+                    <div className="bg-red-50 border-2 border-red-300 text-red-700 px-4 py-3 rounded-xl mb-6 shadow-md">
+                        <span className="font-semibold">⚠️ {error}</span>
                     </div>
                 )}
 
-                <form onSubmit={handleSubmit} className="card p-8 space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b pb-6">
-                        <div className="md:col-span-2">
-                            <h3 className="text-lg font-semibold mb-2">Your Details (Optional)</h3>
-                            <p className="text-sm text-gray-500 mb-4">You can submit anonymously or provide details to help us reach out.</p>
+                <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 border-4 border-orange-100">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b-2 border-orange-100 pb-6">
+                        <div className="md:col-span-2 bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-xl">
+                            <h3 className="text-lg font-semibold mb-2 text-orange-900 flex items-center gap-2">
+                                <span>👤</span> Your Details (Optional)
+                            </h3>
+                            <p className="text-sm text-gray-600 mb-4">You can submit anonymously or provide details to help us reach out.</p>
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">Name</label>
