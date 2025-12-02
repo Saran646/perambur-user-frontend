@@ -367,15 +367,16 @@ function ReviewForm() {
                             </Link>
                         </div>
                     </form>
-                </div >
-            </div >
-            )
+                </div>
+            </div>
+        </div>
+    )
 }
 
-            export default function NewReviewPage() {
+export default function NewReviewPage() {
     return (
-            <Suspense fallback={<div className="container-custom py-12 text-center">Loading...</div>}>
-                <ReviewForm />
-            </Suspense>
-            )
+        <Suspense fallback={<div className="container-custom py-12 text-center">Loading...</div>}>
+            <ReviewForm />
+        </Suspense>
+    )
 }
