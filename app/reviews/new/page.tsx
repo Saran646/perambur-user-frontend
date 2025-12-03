@@ -213,13 +213,13 @@ function ReviewForm() {
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 border-4 border-orange-200 ring-2 ring-orange-100">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b-2 border-orange-100 pb-6">
-                            <div className="md:col-span-2 bg-orange-500 p-4 rounded-xl border-2 border-orange-600 shadow-lg">
+                    <form onSubmit={handleSubmit} className="bg-orange-500 rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 border-4 border-orange-600 ring-2 ring-orange-400 animate-fadeIn">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b-2 border-orange-400 pb-6">
+                            <div className="md:col-span-2">
                                 <h3 className="text-lg font-semibold mb-2 text-white flex items-center gap-2">
                                     <span>👤</span> Your Details
                                 </h3>
-                                <p className="text-sm text-orange-50 mb-4">Please provide your details to help us reach out.</p>
+                                <p className="text-sm text-orange-100 mb-4">Please provide your details to help us reach out.</p>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-2">Name *</label>
@@ -233,7 +233,7 @@ function ReviewForm() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2">Phone *</label>
+                                <label className="block text-sm font-medium mb-2 text-white">Phone *</label>
                                 <input
                                     type="tel"
                                     className="input-field"
@@ -252,7 +252,7 @@ function ReviewForm() {
                                 />
                             </div>
                             <div className="md:col-span-2">
-                                <label className="block text-sm font-medium mb-2">Email</label>
+                                <label className="block text-sm font-medium mb-2 text-white">Email</label>
                                 <input
                                     type="email"
                                     className="input-field"
@@ -293,7 +293,7 @@ function ReviewForm() {
 
                         <input type="hidden" name="visitType" value={formData.visitType} />
 
-                        <div className="bg-orange-500 p-4 rounded-xl border-2 border-orange-600 shadow-lg">
+                        <div>
                             <label className="block text-sm font-medium mb-2 text-white">Overall Rating *</label>
                             <div className="flex flex-col gap-1 sm:gap-2">
                                 <div className="flex justify-center sm:justify-start">
@@ -314,7 +314,7 @@ function ReviewForm() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium mb-3">Detailed Ratings (Optional)</label>
+                            <label className="block text-sm font-medium mb-3 text-white">Detailed Ratings (Optional)</label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
                                 {[
                                     { key: 'serviceRating', label: getQuestionLabel('serviceRating') },
