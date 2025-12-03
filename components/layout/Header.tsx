@@ -10,12 +10,9 @@ export default function Header() {
     return (
         <header className="bg-white shadow-md sticky top-0 z-50">
             <div className="container-custom">
-                <div className="flex items-center justify-between h-20 sm:h-24">
-                    {/* Spacer for mobile to center logo */}
-                    <div className="md:hidden w-10"></div>
-
+                <div className="relative flex items-center justify-center h-20 sm:h-24">
                     {/* Centered Logo */}
-                    <Link href="/" className="flex items-center justify-center flex-1 md:flex-none">
+                    <Link href="/" className="flex items-center justify-center">
                         <Image
                             src="/logo-new.png"
                             alt="Perambur Srinivasa"
@@ -27,17 +24,17 @@ export default function Header() {
                         />
                     </Link>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-6">
+                    {/* Desktop Navigation - Absolute Right */}
+                    <nav className="hidden md:flex items-center gap-6 absolute right-0">
                         <Link href="/reviews/new" className="btn-primary">
                             Feedback and Complaint Form
                         </Link>
                     </nav>
 
-                    {/* Mobile Menu Button */}
+                    {/* Mobile Menu Button - Absolute Right */}
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+                        className="md:hidden p-2 rounded-lg hover:bg-gray-100 absolute right-0"
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             {isMenuOpen ? (
