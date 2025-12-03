@@ -42,11 +42,13 @@ function ReviewForm() {
     useEffect(() => {
         fetchBranches()
 
-        // Access localStorage only on client side to prevent hydration error
+        // Check localStorage for stored visit type
         const storedVisitType = localStorage.getItem('visitType')
         if (storedVisitType) {
             setFormData(prev => ({ ...prev, visitType: storedVisitType }))
-            setShowOrderTypeModal(false) // Don't show modal if we have stored preference
+            setShowOrderTypeModal(false) // Don't show modal if preference exists
+        } else {
+            setShowOrderTypeModal(true) // Show modal only if no preference stored
         }
     }, [])
 
@@ -166,7 +168,7 @@ function ReviewForm() {
                         <div>
                             <h1 className="mb-2 text-orange-900 flex items-center gap-2">
                                 <span className="text-4xl">📝</span>
-                                Write a Review
+                                Feedback and Complaint Form
                             </h1>
                             <p className="text-gray-600">Share your delicious experience! 🍴</p>
                         </div>

@@ -25,7 +25,7 @@ export default function Header() {
 
                     <nav className="hidden md:flex items-center gap-6">
                         <Link href="/reviews/new" className="btn-primary">
-                            Write Review
+                            Feedback Form
                         </Link>
                     </nav>
 
@@ -46,7 +46,7 @@ export default function Header() {
                 {isMenuOpen && (
                     <div className="md:hidden pb-4 space-y-2">
                         <Link href="/reviews/new" className="block px-4 py-2 text-orange-600 font-medium hover:bg-orange-50 rounded-lg">
-                            Write Review
+                            Feedback Form
                         </Link>
                     </div>
                 )}
