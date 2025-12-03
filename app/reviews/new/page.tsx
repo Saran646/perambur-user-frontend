@@ -168,7 +168,7 @@ function ReviewForm() {
                         <div>
                             <h1 className="mb-2 text-orange-900 flex items-center gap-2">
                                 <span className="text-4xl">📝</span>
-                                Feedback and Complaint Form
+                                Feedback Form
                             </h1>
                             <p className="text-gray-600">Share your delicious experience! 🍴</p>
                         </div>
@@ -213,7 +213,7 @@ function ReviewForm() {
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 border-4 border-orange-100">
+                    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 border-4 border-orange-200 ring-2 ring-orange-100">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b-2 border-orange-100 pb-6">
                             <div className="md:col-span-2 bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-xl">
                                 <h3 className="text-lg font-semibold mb-2 text-orange-900 flex items-center gap-2">
@@ -293,8 +293,8 @@ function ReviewForm() {
 
                         <input type="hidden" name="visitType" value={formData.visitType} />
 
-                        <div>
-                            <label className="block text-sm font-medium mb-2">Overall Rating *</label>
+                        <div className="bg-gradient-to-br from-orange-50 to-amber-50 p-4 rounded-xl border-2 border-orange-200">
+                            <label className="block text-sm font-medium mb-2 text-orange-900">Overall Rating *</label>
                             <div className="flex flex-col gap-1 sm:gap-2">
                                 <div className="flex justify-center sm:justify-start">
                                     <EmojiRating
