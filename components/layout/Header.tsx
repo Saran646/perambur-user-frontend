@@ -10,25 +10,31 @@ export default function Header() {
     return (
         <header className="bg-white shadow-md sticky top-0 z-50">
             <div className="container-custom">
-                <div className="flex items-center justify-between h-16">
-                    <Link href="/" className="flex items-center">
+                <div className="flex items-center justify-between h-20 sm:h-24">
+                    {/* Spacer for mobile to center logo */}
+                    <div className="md:hidden w-10"></div>
+
+                    {/* Centered Logo */}
+                    <Link href="/" className="flex items-center justify-center flex-1 md:flex-none">
                         <Image
-                            src="/logo.jpg"
+                            src="/logo-new.png"
                             alt="Perambur Srinivasa"
-                            width={200}
-                            height={60}
-                            className="h-12 w-auto object-contain"
+                            width={280}
+                            height={100}
+                            className="h-16 sm:h-20 w-auto object-contain"
                             priority
                             unoptimized
                         />
                     </Link>
 
+                    {/* Desktop Navigation */}
                     <nav className="hidden md:flex items-center gap-6">
                         <Link href="/reviews/new" className="btn-primary">
                             Feedback and Complaint Form
                         </Link>
                     </nav>
 
+                    {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         className="md:hidden p-2 rounded-lg hover:bg-gray-100"
@@ -43,6 +49,7 @@ export default function Header() {
                     </button>
                 </div>
 
+                {/* Mobile Menu */}
                 {isMenuOpen && (
                     <div className="md:hidden pb-4 space-y-2">
                         <Link href="/reviews/new" className="block px-4 py-2 text-orange-600 font-medium hover:bg-orange-50 rounded-lg">
