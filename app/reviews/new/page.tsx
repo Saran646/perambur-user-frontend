@@ -138,8 +138,11 @@ function ReviewForm() {
                     <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 text-center border-4 border-orange-200">
                         <div className="text-6xl mb-4 animate-bounce">✅🍽️</div>
                         <h2 className="text-2xl font-bold mb-2 text-orange-900">Review Submitted!</h2>
-                        <p className="text-gray-600">Thank you for sharing your experience with us! 🙏</p>
-                        <div className="mt-4 text-4xl">🍛 🍕 🍜 🥘 🍱</div>
+                        <p className="text-gray-600 mb-6">Thank you for sharing your experience with us! 🙏</p>
+                        <div className="mb-6 text-4xl">🍛 🍕 🍜 🥘 🍱</div>
+                        <Link href="/" className="btn-primary text-lg px-8 py-3 inline-block">
+                            Go to Dashboard
+                        </Link>
                     </div>
                 </div>
             </div>
