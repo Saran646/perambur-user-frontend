@@ -217,18 +217,19 @@ function ReviewForm() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b-2 border-orange-100 pb-6">
                             <div className="md:col-span-2 bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-xl">
                                 <h3 className="text-lg font-semibold mb-2 text-orange-900 flex items-center gap-2">
-                                    <span>👤</span> Your Details (Optional)
+                                    <span>👤</span> Your Details
                                 </h3>
-                                <p className="text-sm text-gray-600 mb-4">You can submit anonymously or provide details to help us reach out.</p>
+                                <p className="text-sm text-gray-600 mb-4">Please provide your details to help us reach out.</p>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium mb-2">Name</label>
+                                <label className="block text-sm font-medium mb-2">Name *</label>
                                 <input
                                     type="text"
                                     className="input-field"
                                     value={formData.guestName}
                                     onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
                                     placeholder="John Doe"
+                                    required
                                 />
                             </div>
                             <div>
@@ -294,19 +295,18 @@ function ReviewForm() {
 
                         <div>
                             <label className="block text-sm font-medium mb-2">Overall Rating *</label>
-                            <div className="flex items-center gap-3">
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                                 <EmojiRating
                                     rating={formData.overallRating}
                                     onChange={(rating) => setFormData({ ...formData, overallRating: rating })}
                                     size="lg"
                                 />
-                                <span className="text-gray-600 font-medium">
-                                    {formData.overallRating > 0 ? (
-                                        formData.overallRating === 1 ? 'Angry' :
-                                            formData.overallRating === 2 ? 'Unhappy' :
-                                                formData.overallRating === 3 ? 'Neutral' :
-                                                    formData.overallRating === 4 ? 'Happy' : 'Loved it'
-                                    ) : 'Click to rate'}
+                                <span className="text-gray-600 font-medium text-center sm:text-left">
+                                    {formData.overallRating === 1 ? 'Angry' :
+                                        formData.overallRating === 2 ? 'Unhappy' :
+                                            formData.overallRating === 3 ? 'Neutral' :
+                                                formData.overallRating === 4 ? 'Happy' :
+                                                    formData.overallRating === 5 ? 'Loved it' : 'Click to rate'}
                                 </span>
                             </div>
                         </div>
