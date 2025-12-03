@@ -295,7 +295,7 @@ function ReviewForm() {
 
                         <div>
                             <label className="block text-sm font-medium mb-2">Overall Rating *</label>
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-1 sm:gap-2">
                                 <div className="flex justify-center sm:justify-start">
                                     <EmojiRating
                                         rating={formData.overallRating}
@@ -303,12 +303,12 @@ function ReviewForm() {
                                         size="lg"
                                     />
                                 </div>
-                                <div className="flex justify-center sm:justify-start gap-2 sm:gap-6 text-xs sm:text-sm text-gray-600 font-medium">
-                                    <span className="text-center w-12 sm:w-16">Angry</span>
-                                    <span className="text-center w-12 sm:w-16">Sad</span>
-                                    <span className="text-center w-12 sm:w-16">OK</span>
-                                    <span className="text-center w-12 sm:w-16">Good</span>
-                                    <span className="text-center w-12 sm:w-16">Love it</span>
+                                <div className="flex justify-center sm:justify-start gap-2 sm:gap-6 text-[10px] sm:text-sm text-gray-600 font-medium">
+                                    <span className="text-center w-[42px] sm:w-16">Angry</span>
+                                    <span className="text-center w-[42px] sm:w-16">Sad</span>
+                                    <span className="text-center w-[42px] sm:w-16">OK</span>
+                                    <span className="text-center w-[42px] sm:w-16">Good</span>
+                                    <span className="text-center w-[42px] sm:w-16">Love it</span>
                                 </div>
                             </div>
                         </div>
