@@ -295,7 +295,7 @@ function ReviewForm() {
 
                         <div>
                             <label className="block text-sm font-medium mb-2">Overall Rating *</label>
-                            <div className="flex flex-col gap-3">
+                            <div className="flex flex-col gap-2">
                                 <div className="flex items-center justify-center sm:justify-start">
                                     <EmojiRating
                                         rating={formData.overallRating}
@@ -303,12 +303,12 @@ function ReviewForm() {
                                         size="lg"
                                     />
                                 </div>
-                                <div className="grid grid-cols-5 gap-1 text-xs sm:text-sm text-center text-gray-600 font-medium">
-                                    <span>Angry</span>
-                                    <span>Unhappy</span>
-                                    <span>Neutral</span>
-                                    <span>Happy</span>
-                                    <span>Loved it</span>
+                                <div className="flex justify-center sm:justify-start gap-3 sm:gap-4 text-[10px] sm:text-xs text-gray-600 font-medium">
+                                    <span className="w-12 sm:w-14 text-center">Angry</span>
+                                    <span className="w-12 sm:w-14 text-center">Sad</span>
+                                    <span className="w-12 sm:w-14 text-center">OK</span>
+                                    <span className="w-12 sm:w-14 text-center">Good</span>
+                                    <span className="w-12 sm:w-14 text-center">Love it</span>
                                 </div>
                             </div>
                         </div>
