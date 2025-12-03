@@ -215,11 +215,11 @@ function ReviewForm() {
 
                     <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 border-4 border-orange-200 ring-2 ring-orange-100">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b-2 border-orange-100 pb-6">
-                            <div className="md:col-span-2 bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-xl">
+                            <div className="md:col-span-2 bg-gradient-to-br from-orange-100 to-amber-100 p-4 rounded-xl border-2 border-orange-300">
                                 <h3 className="text-lg font-semibold mb-2 text-orange-900 flex items-center gap-2">
                                     <span>👤</span> Your Details
                                 </h3>
-                                <p className="text-sm text-gray-600 mb-4">Please provide your details to help us reach out.</p>
+                                <p className="text-sm text-orange-800 mb-4">Please provide your details to help us reach out.</p>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium mb-2">Name *</label>
