@@ -24,9 +24,6 @@ export default function Header() {
                     </Link>
 
                     <nav className="hidden md:flex items-center gap-6">
-                        <Link href="/branches" className="text-gray-700 hover:text-orange-600 transition-colors font-medium">
-                            Branches
-                        </Link>
                         <Link href="/reviews/new" className="btn-primary">
                             Write Review
                         </Link>
@@ -48,9 +45,6 @@ export default function Header() {
 
                 {isMenuOpen && (
                     <div className="md:hidden pb-4 space-y-2">
-                        <Link href="/branches" className="block px-4 py-2 text-gray-700 hover:bg-orange-50 rounded-lg">
-                            Branches
-                        </Link>
                         <Link href="/reviews/new" className="block px-4 py-2 text-orange-600 font-medium hover:bg-orange-50 rounded-lg">
                             Write Review
                         </Link>
