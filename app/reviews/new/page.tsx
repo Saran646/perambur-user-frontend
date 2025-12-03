@@ -120,7 +120,7 @@ function ReviewForm() {
 
         switch (key) {
             case 'serviceRating':
-                return isDelivery ? 'Delivery Time & Service' : 'Staff Courtesy & Speed'
+                return isDelivery ? 'Delivery Time & Service' : 'Service'
             case 'ambienceRating':
                 return isDelivery ? 'Packaging Quality' : 'Ambience & Atmosphere'
             case 'cleanlinessRating':
@@ -315,8 +315,8 @@ function ReviewForm() {
                             <label className="block text-sm font-medium mb-3">Detailed Ratings (Optional)</label>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
                                 {[
-                                    { key: 'tasteRating', label: 'Taste Quality' },
                                     { key: 'serviceRating', label: getQuestionLabel('serviceRating') },
+                                    { key: 'tasteRating', label: 'Taste Quality' },
                                     { key: 'ambienceRating', label: getQuestionLabel('ambienceRating') },
                                     { key: 'cleanlinessRating', label: getQuestionLabel('cleanlinessRating') },
                                     { key: 'valueRating', label: 'Value for Money' },
