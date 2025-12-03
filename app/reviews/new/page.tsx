@@ -295,19 +295,21 @@ function ReviewForm() {
 
                         <div>
                             <label className="block text-sm font-medium mb-2">Overall Rating *</label>
-                            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-                                <EmojiRating
-                                    rating={formData.overallRating}
-                                    onChange={(rating) => setFormData({ ...formData, overallRating: rating })}
-                                    size="lg"
-                                />
-                                <span className="text-gray-600 font-medium text-center sm:text-left">
-                                    {formData.overallRating === 1 ? 'Angry' :
-                                        formData.overallRating === 2 ? 'Unhappy' :
-                                            formData.overallRating === 3 ? 'Neutral' :
-                                                formData.overallRating === 4 ? 'Happy' :
-                                                    formData.overallRating === 5 ? 'Loved it' : 'Click to rate'}
-                                </span>
+                            <div className="flex flex-col gap-3">
+                                <div className="flex items-center justify-center sm:justify-start">
+                                    <EmojiRating
+                                        rating={formData.overallRating}
+                                        onChange={(rating) => setFormData({ ...formData, overallRating: rating })}
+                                        size="lg"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-5 gap-1 text-xs sm:text-sm text-center text-gray-600 font-medium">
+                                    <span>Angry</span>
+                                    <span>Unhappy</span>
+                                    <span>Neutral</span>
+                                    <span>Happy</span>
+                                    <span>Loved it</span>
+                                </div>
                             </div>
                         </div>
 
