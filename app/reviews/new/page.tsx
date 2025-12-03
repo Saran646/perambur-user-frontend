@@ -303,12 +303,12 @@ function ReviewForm() {
                                         size="lg"
                                     />
                                 </div>
-                                <div className="flex justify-center sm:justify-start gap-2 sm:gap-6 text-[9px] sm:text-xs text-gray-600 font-medium">
-                                    <span className="text-center w-10 sm:w-12">Angry</span>
-                                    <span className="text-center w-10 sm:w-12">Sad</span>
-                                    <span className="text-center w-10 sm:w-12">OK</span>
-                                    <span className="text-center w-10 sm:w-12">Good</span>
-                                    <span className="text-center w-10 sm:w-12">Love it</span>
+                                <div className="flex justify-center sm:justify-start gap-2 sm:gap-6 text-xs sm:text-sm text-gray-600 font-medium">
+                                    <span className="text-center w-12 sm:w-16">Angry</span>
+                                    <span className="text-center w-12 sm:w-16">Sad</span>
+                                    <span className="text-center w-12 sm:w-16">OK</span>
+                                    <span className="text-center w-12 sm:w-16">Good</span>
+                                    <span className="text-center w-12 sm:w-16">Love it</span>
                                 </div>
                             </div>
                         </div>
