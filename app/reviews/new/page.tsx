@@ -150,21 +150,15 @@ function ReviewForm() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-orange-100 via-amber-50 to-yellow-100 relative overflow-hidden">
-            {/* Animated Background Decorations */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                {/* Floating circles */}
-                <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-                <div className="absolute top-40 right-20 w-96 h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
-                <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-amber-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '4s' }}></div>
+        <div className="min-h-screen bg-gradient-to-b from-white via-orange-50 to-amber-100 relative">
+            {/* Subtle dot pattern overlay */}
+            <div className="absolute inset-0 opacity-30" style={{
+                backgroundImage: 'radial-gradient(circle, #f97316 1px, transparent 1px)',
+                backgroundSize: '24px 24px'
+            }}></div>
 
-                {/* Food Icons */}
-                <div className="text-9xl absolute top-10 left-10 transform rotate-12 opacity-10">🍛</div>
-                <div className="text-8xl absolute top-40 right-20 transform -rotate-12 opacity-10">🍕</div>
-                <div className="text-7xl absolute bottom-20 left-1/4 transform rotate-45 opacity-10">🍜</div>
-                <div className="text-9xl absolute bottom-40 right-10 transform -rotate-45 opacity-10">🥘</div>
-                <div className="text-8xl absolute top-1/2 left-10 transform rotate-12 opacity-10">🍱</div>
-            </div>
+            {/* Top decorative wave */}
+            <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500 opacity-10"></div>
 
             <OrderTypeModal
                 isOpen={showOrderTypeModal}
