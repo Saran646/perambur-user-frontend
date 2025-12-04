@@ -10,6 +10,8 @@ import { api } from '@/lib/api'
 interface Branch {
     id: string
     name: string
+    latitude?: number
+    longitude?: number
 }
 
 function ReviewForm() {
@@ -22,6 +24,8 @@ function ReviewForm() {
     const [error, setError] = useState('')
     const [success, setSuccess] = useState(false)
     const [showOrderTypeModal, setShowOrderTypeModal] = useState(true)
+    const [locationStatus, setLocationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+    const [nearestBranchName, setNearestBranchName] = useState('')
 
     const [formData, setFormData] = useState({
         branchId: branchIdParam || '',
@@ -58,6 +62,8 @@ function ReviewForm() {
             // Ensure data is an array
             if (Array.isArray(data)) {
                 setBranches(data)
+                // After fetching branches, try to get user location
+                getUserLocation(data)
             } else {
                 console.error('Branches data is not an array:', data)
                 setBranches([])
@@ -66,6 +72,74 @@ function ReviewForm() {
             console.error('Failed to fetch branches:', err)
             setBranches([]) // Set empty array on error
         }
+    }
+
+    // Calculate distance between two coordinates using Haversine formula
+    const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+        const R = 6371 // Earth's radius in km
+        const dLat = (lat2 - lat1) * Math.PI / 180
+        const dLon = (lon2 - lon1) * Math.PI / 180
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        return R * c
+    }
+
+    // Get user location and find nearest branch
+    const getUserLocation = (branchList: Branch[]) => {
+        if (!navigator.geolocation) {
+            console.log('Geolocation not supported')
+            return
+        }
+
+        setLocationStatus('loading')
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const userLat = position.coords.latitude
+                const userLon = position.coords.longitude
+
+                // Find branches with coordinates
+                const branchesWithCoords = branchList.filter(b => b.latitude && b.longitude)
+
+                if (branchesWithCoords.length === 0) {
+                    setLocationStatus('error')
+                    return
+                }
+
+                // Find nearest branch
+                let nearestBranch = branchesWithCoords[0]
+                let minDistance = calculateDistance(
+                    userLat, userLon,
+                    nearestBranch.latitude!, nearestBranch.longitude!
+                )
+
+                branchesWithCoords.forEach(branch => {
+                    const distance = calculateDistance(
+                        userLat, userLon,
+                        branch.latitude!, branch.longitude!
+                    )
+                    if (distance < minDistance) {
+                        minDistance = distance
+                        nearestBranch = branch
+                    }
+                })
+
+                // Auto-select nearest branch if no branch already selected
+                if (!formData.branchId) {
+                    setFormData(prev => ({ ...prev, branchId: nearestBranch.id }))
+                    setNearestBranchName(nearestBranch.name)
+                }
+                setLocationStatus('success')
+            },
+            (error) => {
+                console.log('Geolocation error:', error.message)
+                setLocationStatus('error')
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 300000 }
+        )
     }
 
     const handleOrderTypeSelect = (type: string) => {
@@ -273,11 +347,25 @@ function ReviewForm() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium mb-2">Select Branch *</label>
+                            <label className="block text-sm font-medium mb-2 flex items-center gap-2">
+                                Select Branch *
+                                {locationStatus === 'loading' && (
+                                    <span className="text-xs text-orange-600 animate-pulse">📍 Detecting location...</span>
+                                )}
+                                {locationStatus === 'success' && nearestBranchName && (
+                                    <span className="text-xs text-green-600">✅ Nearest: {nearestBranchName}</span>
+                                )}
+                            </label>
                             <select
-                                className="input-field"
+                                className={`input-field ${locationStatus === 'success' && nearestBranchName ? 'border-green-400 ring-2 ring-green-100' : ''}`}
                                 value={formData.branchId}
-                                onChange={(e) => setFormData({ ...formData, branchId: e.target.value })}
+                                onChange={(e) => {
+                                    setFormData({ ...formData, branchId: e.target.value })
+                                    // Clear the nearest branch indicator if user manually changes
+                                    if (e.target.value !== formData.branchId) {
+                                        setNearestBranchName('')
+                                    }
+                                }}
                                 required
                             >
                                 <option value="">Choose a branch...</option>
@@ -285,6 +373,9 @@ function ReviewForm() {
                                     <option key={branch.id} value={branch.id}>{branch.name}</option>
                                 ))}
                             </select>
+                            {locationStatus === 'error' && (
+                                <p className="text-xs text-gray-500 mt-1">📍 Unable to detect location. Please select manually.</p>
+                            )}
                         </div>
 
                         {formData.visitType === 'DINE_IN' && (
