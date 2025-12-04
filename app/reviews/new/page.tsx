@@ -10,6 +10,7 @@ import { api } from '@/lib/api'
 interface Branch {
     id: string
     name: string
+    mapLink?: string  // Google Maps URL
     latitude?: number
     longitude?: number
 }
@@ -87,6 +88,34 @@ function ReviewForm() {
         return R * c
     }
 
+    // Extract coordinates from Google Maps URL
+    const extractCoordsFromMapLink = (mapLink: string): { lat: number, lng: number } | null => {
+        if (!mapLink) return null
+
+        // Pattern 1: @lat,lng in URL (most common)
+        const atPattern = /@(-?\d+\.\d+),(-?\d+\.\d+)/
+        const atMatch = mapLink.match(atPattern)
+        if (atMatch) {
+            return { lat: parseFloat(atMatch[1]), lng: parseFloat(atMatch[2]) }
+        }
+
+        // Pattern 2: ?q=lat,lng or &q=lat,lng
+        const qPattern = /[?&]q=(-?\d+\.\d+),(-?\d+\.\d+)/
+        const qMatch = mapLink.match(qPattern)
+        if (qMatch) {
+            return { lat: parseFloat(qMatch[1]), lng: parseFloat(qMatch[2]) }
+        }
+
+        // Pattern 3: /place/lat,lng or ll=lat,lng
+        const placePattern = /(?:\/place\/|ll=)(-?\d+\.\d+),(-?\d+\.\d+)/
+        const placeMatch = mapLink.match(placePattern)
+        if (placeMatch) {
+            return { lat: parseFloat(placeMatch[1]), lng: parseFloat(placeMatch[2]) }
+        }
+
+        return null
+    }
+
     // Get user location and find nearest branch
     const getUserLocation = (branchList: Branch[]) => {
         if (!navigator.geolocation) {
@@ -101,8 +130,17 @@ function ReviewForm() {
                 const userLat = position.coords.latitude
                 const userLon = position.coords.longitude
 
-                // Find branches with coordinates
-                const branchesWithCoords = branchList.filter(b => b.latitude && b.longitude)
+                // Find branches with coordinates (from mapLink or direct lat/lng)
+                const branchesWithCoords = branchList.map(b => {
+                    // Try to get coords from mapLink first, then fall back to direct coords
+                    if (b.mapLink) {
+                        const coords = extractCoordsFromMapLink(b.mapLink)
+                        if (coords) {
+                            return { ...b, latitude: coords.lat, longitude: coords.lng }
+                        }
+                    }
+                    return b
+                }).filter(b => b.latitude && b.longitude)
 
                 if (branchesWithCoords.length === 0) {
                     setLocationStatus('error')
