@@ -150,14 +150,20 @@ function ReviewForm() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 relative overflow-hidden">
-            {/* Food Icons Background Decoration */}
-            <div className="absolute inset-0 opacity-5 pointer-events-none">
-                <div className="text-9xl absolute top-10 left-10 transform rotate-12">🍛</div>
-                <div className="text-8xl absolute top-40 right-20 transform -rotate-12">🍕</div>
-                <div className="text-7xl absolute bottom-20 left-1/4 transform rotate-45">🍜</div>
-                <div className="text-9xl absolute bottom-40 right-10 transform -rotate-45">🥘</div>
-                <div className="text-8xl absolute top-1/2 left-10 transform rotate-12">🍱</div>
+        <div className="min-h-screen bg-gradient-to-br from-orange-100 via-amber-50 to-yellow-100 relative overflow-hidden">
+            {/* Animated Background Decorations */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                {/* Floating circles */}
+                <div className="absolute top-20 left-10 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+                <div className="absolute top-40 right-20 w-96 h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
+                <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-amber-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '4s' }}></div>
+
+                {/* Food Icons */}
+                <div className="text-9xl absolute top-10 left-10 transform rotate-12 opacity-10">🍛</div>
+                <div className="text-8xl absolute top-40 right-20 transform -rotate-12 opacity-10">🍕</div>
+                <div className="text-7xl absolute bottom-20 left-1/4 transform rotate-45 opacity-10">🍜</div>
+                <div className="text-9xl absolute bottom-40 right-10 transform -rotate-45 opacity-10">🥘</div>
+                <div className="text-8xl absolute top-1/2 left-10 transform rotate-12 opacity-10">🍱</div>
             </div>
 
             <OrderTypeModal
@@ -216,7 +222,7 @@ function ReviewForm() {
                         </div>
                     )}
 
-                    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 border-4 border-orange-100 ring-2 ring-orange-50 animate-fadeIn">
+                    <form onSubmit={handleSubmit} className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 border-4 border-orange-500 ring-4 ring-orange-200 animate-fadeIn">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-b-2 border-orange-100 pb-6">
                             <div className="md:col-span-2 bg-gradient-to-r from-orange-50 to-amber-50 p-4 rounded-xl border border-orange-200">
                                 <h3 className="text-lg font-semibold mb-2 text-orange-900 flex items-center gap-2">
