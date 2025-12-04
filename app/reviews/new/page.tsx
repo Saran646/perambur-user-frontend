@@ -218,9 +218,8 @@ function ReviewForm() {
         try {
             await api.submitReview(formData)
             setSuccess(true)
-            setTimeout(() => {
-                router.push(`/branches`)
-            }, 2000)
+            // Removed auto-redirect to /branches which was causing 404
+            // User can now click "Go to Dashboard" button manually
         } catch (err: any) {
             setError(err.message || 'An error occurred. Please try again.')
             setLoading(false)
