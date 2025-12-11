@@ -288,7 +288,7 @@ function ReviewForm() {
                         <div>
                             <h1 className="mb-2 text-orange-900 flex items-center gap-2">
                                 <span className="text-4xl">📝</span>
-                                Feedback and Complaint Form
+                                Feedback Form
                             </h1>
                             <p className="text-gray-600">Share your delicious experience! 🍴</p>
                         </div>
