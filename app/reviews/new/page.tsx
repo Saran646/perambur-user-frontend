@@ -296,36 +296,11 @@ function ReviewForm() {
                             onClick={() => setShowOrderTypeModal(true)}
                             className="text-sm text-orange-600 font-medium hover:underline bg-orange-100 px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all"
                         >
-                            {formData.visitType === 'DELIVERY' ? '🛵 Delivery' : '🍽️ Dine-in / Takeaway'} (Change)
+                            {formData.visitType === 'DELIVERY' ? '🛵 Online Delivery' : '🍽️ Dine in'} (Change)
                         </button>
                     </div>
 
-                    {formData.visitType !== 'DELIVERY' && (
-                        <div className="flex justify-center mb-8">
-                            <div className="bg-gray-100 p-1 rounded-lg inline-flex">
-                                <button
-                                    type="button"
-                                    onClick={() => setFormData({ ...formData, visitType: 'DINE_IN' })}
-                                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${formData.visitType === 'DINE_IN'
-                                        ? 'bg-white text-orange-600 shadow-sm'
-                                        : 'text-gray-600 hover:text-gray-900'
-                                        }`}
-                                >
-                                    🍽️ Dine-in
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={() => setFormData({ ...formData, visitType: 'TAKEAWAY' })}
-                                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${formData.visitType === 'TAKEAWAY'
-                                        ? 'bg-white text-orange-600 shadow-sm'
-                                        : 'text-gray-600 hover:text-gray-900'
-                                        }`}
-                                >
-                                    🥡 Takeaway
-                                </button>
-                            </div>
-                        </div>
-                    )}
+
 
                     {error && (
                         <div className="bg-red-50 border-2 border-red-300 text-red-700 px-4 py-3 rounded-xl mb-6 shadow-md">

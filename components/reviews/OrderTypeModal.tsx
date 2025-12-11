@@ -25,10 +25,10 @@ export default function OrderTypeModal({ isOpen, onSelect }: OrderTypeModalProps
                             <span className="text-3xl">🍽️</span>
                             <div>
                                 <h3 className="font-semibold text-lg text-gray-900 group-hover:text-orange-700">
-                                    Dine-in / Takeaway
+                                    Dine in
                                 </h3>
                                 <p className="text-sm text-gray-500">
-                                    Eating at the restaurant or picking up
+                                    Eating at the restaurant
                                 </p>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ export default function OrderTypeModal({ isOpen, onSelect }: OrderTypeModalProps
                             <span className="text-3xl">🛵</span>
                             <div>
                                 <h3 className="font-semibold text-lg text-gray-900 group-hover:text-orange-700">
-                                    Delivery
+                                    Online Delivery
                                 </h3>
                                 <p className="text-sm text-gray-500">
                                     Ordered via Swiggy, Zomato, or Direct
