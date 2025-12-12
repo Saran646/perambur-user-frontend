@@ -17,7 +17,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/reviews/new" className="btn-primary text-lg px-8 py-4 bg-yellow-500 hover:bg-yellow-600 text-orange-900 border-none">
-                Feedback and Complaint Form
+                Feedback Form
               </Link>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Have you visited us recently?</h2>
             <p className="text-xl mb-8 opacity-90">Share your experience and help us serve you better.</p>
             <Link href="/reviews/new" className="btn-secondary text-lg px-8 py-3 bg-white text-orange-600 hover:bg-gray-100 border-none">
-              Feedback and Complaint Form
+              Feedback Form
             </Link>
           </div>
         </section>
