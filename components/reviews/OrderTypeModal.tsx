@@ -35,6 +35,23 @@ export default function OrderTypeModal({ isOpen, onSelect }: OrderTypeModalProps
                     </button>
 
                     <button
+                        onClick={() => onSelect('TAKEAWAY')}
+                        className="group relative p-4 border-2 border-orange-100 rounded-xl hover:border-orange-500 hover:bg-orange-50 transition-all text-left"
+                    >
+                        <div className="flex items-center gap-4">
+                            <span className="text-3xl">🥡</span>
+                            <div>
+                                <h3 className="font-semibold text-lg text-gray-900 group-hover:text-orange-700">
+                                    Takeaway
+                                </h3>
+                                <p className="text-sm text-gray-500">
+                                    Picked up from the restaurant
+                                </p>
+                            </div>
+                        </div>
+                    </button>
+
+                    <button
                         onClick={() => onSelect('DELIVERY')}
                         className="group relative p-4 border-2 border-orange-100 rounded-xl hover:border-orange-500 hover:bg-orange-50 transition-all text-left"
                     >

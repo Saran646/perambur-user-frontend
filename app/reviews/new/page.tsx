@@ -293,7 +293,9 @@ function ReviewForm() {
                             onClick={() => setShowOrderTypeModal(true)}
                             className="text-sm text-orange-600 font-medium hover:underline bg-orange-100 px-4 py-2 rounded-full shadow-md hover:shadow-lg transition-all"
                         >
-                            {formData.visitType === 'DELIVERY' ? '🛵 Online Delivery' : '🍽️ Dine in'} (Change)
+                            {formData.visitType === 'DELIVERY' ? '🛵 Online Delivery' :
+                                formData.visitType === 'TAKEAWAY' ? '🥡 Takeaway' :
+                                    '🍽️ Dine in'} (Change)
                         </button>
                     </div>
 
