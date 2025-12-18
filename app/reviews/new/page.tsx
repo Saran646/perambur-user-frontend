@@ -31,6 +31,7 @@ function ReviewForm() {
     const [formData, setFormData] = useState({
         branchId: branchIdParam || '',
         guestName: '',
+        visitDate: new Date().toISOString().split('T')[0], // Today's date in YYYY-MM-DD format
         guestEmail: '',
         guestPhone: '',
         overallRating: 0,
@@ -40,7 +41,9 @@ function ReviewForm() {
         cleanlinessRating: 0,
         valueRating: 0,
         visitType: 'TAKEAWAY',
-        reviewText: '',
+        whatLiked: '',
+        whatImprove: '',
+        wouldRecommend: '',
         tableNumber: '',
     })
 
@@ -209,12 +212,6 @@ function ReviewForm() {
             return
         }
 
-        if (formData.overallRating <= 3 && !formData.reviewText.trim()) {
-            setError('Please describe your grievance (required for 1-3 star ratings)')
-            setLoading(false)
-            return
-        }
-
         try {
             await api.submitReview(formData)
             setSuccess(true)
@@ -346,6 +343,17 @@ function ReviewForm() {
                                     minLength={10}
                                 />
                             </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-2">Visit Date *</label>
+                                <input
+                                    type="date"
+                                    className="input-field"
+                                    value={formData.visitDate}
+                                    onChange={(e) => setFormData({ ...formData, visitDate: e.target.value })}
+                                    max={new Date().toISOString().split('T')[0]} // Can't select future dates
+                                    required
+                                />
+                            </div>
                             <div className="md:col-span-2">
                                 <label className="block text-sm font-medium mb-2">Email</label>
                                 <input
@@ -447,27 +455,83 @@ function ReviewForm() {
                             </div>
                         </div>
 
-                        <div>
-                            <label className="block text-sm font-medium mb-2">
-                                {formData.overallRating > 0 && formData.overallRating <= 3
-                                    ? 'What went wrong? (Required) *'
-                                    : 'Your Review (Optional)'}
-                            </label>
-                            <textarea
-                                className={`textarea-field ${formData.overallRating > 0 && formData.overallRating <= 3 ? 'border-red-300 focus:border-red-500' : ''}`}
-                                rows={6}
-                                value={formData.reviewText}
-                                onChange={(e) => setFormData({ ...formData, reviewText: e.target.value })}
-                                placeholder={formData.overallRating > 0 && formData.overallRating <= 3
-                                    ? "Please tell us about your grievance so we can improve..."
-                                    : "Share your experience..."}
-                                required={formData.overallRating > 0 && formData.overallRating <= 3}
-                            />
-                            {formData.overallRating > 0 && formData.overallRating <= 3 && (
-                                <p className="text-xs text-red-600 mt-1">
-                                    * Grievance details are mandatory for low ratings.
-                                </p>
-                            )}
+                        {/* New Structured Feedback Questions */}
+                        <div className="space-y-4 bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-xl border border-orange-200">
+                            <div>
+                                <label className="block text-sm font-medium mb-2 text-orange-900">
+                                    What did you like the most? *
+                                </label>
+                                <textarea
+                                    className="textarea-field"
+                                    rows={4}
+                                    value={formData.whatLiked}
+                                    onChange={(e) => setFormData({ ...formData, whatLiked: e.target.value })}
+                                    placeholder="Tell us what you enjoyed about your experience..."
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium mb-2 text-orange-900">
+                                    What can we improve? *
+                                </label>
+                                <textarea
+                                    className="textarea-field"
+                                    rows={4}
+                                    value={formData.whatImprove}
+                                    onChange={(e) => setFormData({ ...formData, whatImprove: e.target.value })}
+                                    placeholder="Help us serve you better by sharing areas where we can improve..."
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium mb-3 text-orange-900">
+                                    Would you recommend our restaurant to others? *
+                                </label>
+                                <div className="flex gap-4 flex-wrap">
+                                    <label className="flex items-center gap-2 cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="wouldRecommend"
+                                            value="Yes"
+                                            checked={formData.wouldRecommend === 'Yes'}
+                                            onChange={(e) => setFormData({ ...formData, wouldRecommend: e.target.value })}
+                                            className="w-4 h-4 text-orange-600 focus:ring-orange-500"
+                                            required
+                                        />
+                                        <span className="text-sm font-medium">Yes</span>
+                                    </label>
+                                    <label className="flex items-center gap-2 cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="wouldRecommend"
+                                            value="No"
+                                            checked={formData.wouldRecommend === 'No'}
+                                            onChange={(e) => setFormData({ ...formData, wouldRecommend: e.target.value })}
+                                            className="w-4 h-4 text-orange-600 focus:ring-orange-500"
+                                        />
+                                        <span className="text-sm font-medium">No</span>
+                                    </label>
+                                    <label className="flex items-center gap-2 cursor-pointer">
+                                        <input
+                                            type="radio"
+                                            name="wouldRecommend"
+                                            value="Maybe"
+                                            checked={formData.wouldRecommend === 'Maybe'}
+                                            onChange={(e) => setFormData({ ...formData, wouldRecommend: e.target.value })}
+                                            className="w-4 h-4 text-orange-600 focus:ring-orange-500"
+                                        />
+                                        <span className="text-sm font-medium">Maybe</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            {/* Thank You Message */}
+                            <div className="mt-4 p-4 bg-white rounded-lg border-2 border-orange-300 text-center">
+                                <p className="text-orange-900 font-semibold mb-1">Thank you for dining with us.</p>
+                                <p className="text-sm text-gray-600">Your feedback helps us serve you better.</p>
+                            </div>
                         </div>
 
                         <div className="flex gap-4">
