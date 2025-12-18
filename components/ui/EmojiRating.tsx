@@ -9,11 +9,10 @@ interface EmojiRatingProps {
 
 export default function EmojiRating({ rating, onChange, size = 'md', readOnly = false }: EmojiRatingProps) {
     const emojis = [
-        { value: 1, symbol: '😠', label: 'Angry' },
-        { value: 2, symbol: '☹️', label: 'Unhappy' },
-        { value: 3, symbol: '😐', label: 'Neutral' },
-        { value: 4, symbol: '🙂', label: 'Happy' },
-        { value: 5, symbol: '😍', label: 'Loved it' },
+        { value: 4, symbol: '😍', label: 'Love it' },
+        { value: 3, symbol: '😊', label: 'Good' },
+        { value: 2, symbol: '😐', label: 'Average' },
+        { value: 1, symbol: '🙁', label: 'Poor' },
     ]
 
     const sizeClasses = {
