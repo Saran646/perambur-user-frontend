@@ -459,7 +459,7 @@ function ReviewForm() {
                         <div className="space-y-4 bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-xl border border-orange-200">
                             <div>
                                 <label className="block text-sm font-medium mb-2 text-orange-900">
-                                    What did you like the most? *
+                                    What did you like the most?
                                 </label>
                                 <textarea
                                     className="textarea-field"
@@ -467,13 +467,12 @@ function ReviewForm() {
                                     value={formData.whatLiked}
                                     onChange={(e) => setFormData({ ...formData, whatLiked: e.target.value })}
                                     placeholder="Tell us what you enjoyed about your experience..."
-                                    required
                                 />
                             </div>
 
                             <div>
                                 <label className="block text-sm font-medium mb-2 text-orange-900">
-                                    What can we improve? *
+                                    What can we improve?
                                 </label>
                                 <textarea
                                     className="textarea-field"
@@ -481,7 +480,6 @@ function ReviewForm() {
                                     value={formData.whatImprove}
                                     onChange={(e) => setFormData({ ...formData, whatImprove: e.target.value })}
                                     placeholder="Help us serve you better by sharing areas where we can improve..."
-                                    required
                                 />
                             </div>
 
