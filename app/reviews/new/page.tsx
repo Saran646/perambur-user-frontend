@@ -492,10 +492,10 @@ function ReviewForm() {
                                 {[
                                     { key: 'serviceRating', label: getQuestionLabel('serviceRating') },
                                     { key: 'tasteRating', label: 'Taste Quality' },
-                                    { key: 'experienceRating', label: 'Experience' },
                                     { key: 'ambienceRating', label: getQuestionLabel('ambienceRating') },
                                     { key: 'cleanlinessRating', label: getQuestionLabel('cleanlinessRating') },
                                     { key: 'valueRating', label: 'Value for Money' },
+                                    { key: 'experienceRating', label: 'Experience' },
                                 ].map(({ key, label }) => (
                                     <div key={key} className="flex items-center justify-between">
                                         <span className="text-sm font-medium text-gray-700">{label}:</span>
