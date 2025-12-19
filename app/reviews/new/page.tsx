@@ -43,6 +43,7 @@ function ReviewForm() {
         ambienceRating: 0,
         cleanlinessRating: 0,
         valueRating: 0,
+        experienceRating: 0,
         visitType: 'TAKEAWAY',
         whatLiked: '',
         whatImprove: '',
@@ -491,6 +492,7 @@ function ReviewForm() {
                                 {[
                                     { key: 'serviceRating', label: getQuestionLabel('serviceRating') },
                                     { key: 'tasteRating', label: 'Taste Quality' },
+                                    { key: 'experienceRating', label: 'Experience' },
                                     { key: 'ambienceRating', label: getQuestionLabel('ambienceRating') },
                                     { key: 'cleanlinessRating', label: getQuestionLabel('cleanlinessRating') },
                                     { key: 'valueRating', label: 'Value for Money' },
