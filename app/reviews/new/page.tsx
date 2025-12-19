@@ -10,6 +10,7 @@ import { api } from '@/lib/api'
 interface Branch {
     id: string
     name: string
+    area?: string
     mapLink?: string  // Google Maps URL
     latitude?: number
     longitude?: number
@@ -372,7 +373,7 @@ function ReviewForm() {
                         </div>
 
                         <div className="relative">
-                            <label className="block text-sm font-medium mb-2 flex items-center gap-2">
+                            <label className="block text-sm font-medium mb-2 flex items-center gap-2 text-orange-900">
                                 Select Branch *
                                 {locationStatus === 'loading' && (
                                     <span className="text-xs text-orange-600 animate-pulse">📍 Detecting location...</span>
@@ -382,26 +383,32 @@ function ReviewForm() {
                                 )}
                             </label>
 
-                            <input
-                                type="text"
-                                className={`input-field ${locationStatus === 'success' && nearestBranchName ? 'border-green-400 ring-2 ring-green-100' : ''}`}
-                                placeholder="Search for a branch..."
-                                value={branchSearch}
-                                onChange={(e) => {
-                                    setBranchSearch(e.target.value)
-                                    setFormData({ ...formData, branchId: '' }) // Clear selection while searching
-                                    if (nearestBranchName) setNearestBranchName('')
-                                }}
-                                onFocus={() => setIsSearchFocused(true)}
-                                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay to allow click
-                                required={!formData.branchId}
-                            />
+                            <div className="relative">
+                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </span>
+                                <input
+                                    type="text"
+                                    className={`input-field pl-10 ${locationStatus === 'success' && nearestBranchName ? 'border-green-400 ring-2 ring-green-100' : ''}`}
+                                    placeholder="Type branch name (e.g. Perambur)..."
+                                    value={branchSearch}
+                                    onChange={(e) => {
+                                        setBranchSearch(e.target.value)
+                                        setFormData({ ...formData, branchId: '' }) // Clear selection while searching
+                                        if (nearestBranchName) setNearestBranchName('')
+                                    }}
+                                    onFocus={() => setIsSearchFocused(true)}
+                                    onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay to allow click
+                                    required={!formData.branchId}
+                                />
+                            </div>
 
-                            {isSearchFocused && (
+                            {isSearchFocused && branchSearch.length > 0 && (
                                 <div className="absolute z-50 w-full mt-1 bg-white border border-orange-200 rounded-xl shadow-xl max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2">
                                     {branches
                                         .filter(branch => {
-                                            if (!branchSearch) return true
                                             const search = branchSearch.toLowerCase()
                                             const words = branch.name.toLowerCase().split(' ')
                                             // Match if search matches start of word 1 or word 2
@@ -419,18 +426,20 @@ function ReviewForm() {
                                                 }}
                                             >
                                                 <div className="font-medium text-gray-900">{branch.name}</div>
-                                                {branch.mapLink && <div className="text-xs text-gray-500">📍 View on map</div>}
+                                                <div className="flex items-center gap-2 mt-0.5">
+                                                    {branch.area && <span className="text-xs text-gray-500">📍 {branch.area}</span>}
+                                                    {branch.mapLink && <span className="text-xs text-orange-400">🗺️ View Map</span>}
+                                                </div>
                                             </button>
                                         ))
                                     }
                                     {branches.filter(branch => {
-                                        if (!branchSearch) return true
                                         const search = branchSearch.toLowerCase()
                                         const words = branch.name.toLowerCase().split(' ')
                                         return words[0]?.startsWith(search) || words[1]?.startsWith(search)
                                     }).length === 0 && (
-                                        <div className="px-4 py-3 text-sm text-gray-500 italic">No matching branches found...</div>
-                                    )}
+                                            <div className="px-4 py-3 text-sm text-gray-500 italic">No matching branches found...</div>
+                                        )}
                                 </div>
                             )}
 
