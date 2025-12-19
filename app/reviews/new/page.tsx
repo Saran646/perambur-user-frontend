@@ -27,6 +27,8 @@ function ReviewForm() {
     const [showOrderTypeModal, setShowOrderTypeModal] = useState(true)
     const [locationStatus, setLocationStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
     const [nearestBranchName, setNearestBranchName] = useState('')
+    const [branchSearch, setBranchSearch] = useState('')
+    const [isSearchFocused, setIsSearchFocused] = useState(false)
 
     const [formData, setFormData] = useState({
         branchId: branchIdParam || '',
@@ -172,6 +174,7 @@ function ReviewForm() {
                 if (!formData.branchId) {
                     setFormData(prev => ({ ...prev, branchId: nearestBranch.id }))
                     setNearestBranchName(nearestBranch.name)
+                    setBranchSearch(nearestBranch.name)
                 }
                 setLocationStatus('success')
             },
@@ -368,7 +371,7 @@ function ReviewForm() {
                             </div>
                         </div>
 
-                        <div>
+                        <div className="relative">
                             <label className="block text-sm font-medium mb-2 flex items-center gap-2">
                                 Select Branch *
                                 {locationStatus === 'loading' && (
@@ -378,25 +381,61 @@ function ReviewForm() {
                                     <span className="text-xs text-green-600">✅ Nearest: {nearestBranchName}</span>
                                 )}
                             </label>
-                            <select
+
+                            <input
+                                type="text"
                                 className={`input-field ${locationStatus === 'success' && nearestBranchName ? 'border-green-400 ring-2 ring-green-100' : ''}`}
-                                value={formData.branchId}
+                                placeholder="Search for a branch..."
+                                value={branchSearch}
                                 onChange={(e) => {
-                                    setFormData({ ...formData, branchId: e.target.value })
-                                    // Clear the nearest branch indicator if user manually changes
-                                    if (e.target.value !== formData.branchId) {
-                                        setNearestBranchName('')
-                                    }
+                                    setBranchSearch(e.target.value)
+                                    setFormData({ ...formData, branchId: '' }) // Clear selection while searching
+                                    if (nearestBranchName) setNearestBranchName('')
                                 }}
-                                required
-                            >
-                                <option value="">Choose a branch...</option>
-                                {branches.map(branch => (
-                                    <option key={branch.id} value={branch.id}>{branch.name}</option>
-                                ))}
-                            </select>
+                                onFocus={() => setIsSearchFocused(true)}
+                                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay to allow click
+                                required={!formData.branchId}
+                            />
+
+                            {isSearchFocused && (
+                                <div className="absolute z-50 w-full mt-1 bg-white border border-orange-200 rounded-xl shadow-xl max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2">
+                                    {branches
+                                        .filter(branch => {
+                                            if (!branchSearch) return true
+                                            const search = branchSearch.toLowerCase()
+                                            const words = branch.name.toLowerCase().split(' ')
+                                            // Match if search matches start of word 1 or word 2
+                                            return words[0]?.startsWith(search) || words[1]?.startsWith(search)
+                                        })
+                                        .map(branch => (
+                                            <button
+                                                key={branch.id}
+                                                type="button"
+                                                className="w-full text-left px-4 py-3 hover:bg-orange-50 transition-colors border-b border-orange-50 last:border-0"
+                                                onClick={() => {
+                                                    setFormData({ ...formData, branchId: branch.id })
+                                                    setBranchSearch(branch.name)
+                                                    setIsSearchFocused(false)
+                                                }}
+                                            >
+                                                <div className="font-medium text-gray-900">{branch.name}</div>
+                                                {branch.mapLink && <div className="text-xs text-gray-500">📍 View on map</div>}
+                                            </button>
+                                        ))
+                                    }
+                                    {branches.filter(branch => {
+                                        if (!branchSearch) return true
+                                        const search = branchSearch.toLowerCase()
+                                        const words = branch.name.toLowerCase().split(' ')
+                                        return words[0]?.startsWith(search) || words[1]?.startsWith(search)
+                                    }).length === 0 && (
+                                        <div className="px-4 py-3 text-sm text-gray-500 italic">No matching branches found...</div>
+                                    )}
+                                </div>
+                            )}
+
                             {locationStatus === 'error' && (
-                                <p className="text-xs text-gray-500 mt-1">📍 Unable to detect location. Please select manually.</p>
+                                <p className="text-xs text-gray-500 mt-1">📍 Unable to detect location. Please search manually.</p>
                             )}
                         </div>
 
