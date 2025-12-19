@@ -400,13 +400,16 @@ function ReviewForm() {
                                         if (nearestBranchName) setNearestBranchName('')
                                     }}
                                     onFocus={() => setIsSearchFocused(true)}
-                                    onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)} // Delay to allow click
+                                    onBlur={() => setTimeout(() => setIsSearchFocused(false), 500)} // Increased delay for mobile safety
                                     required={!formData.branchId}
                                 />
                             </div>
 
                             {isSearchFocused && branchSearch.length > 0 && (
-                                <div className="absolute z-50 w-full mt-1 bg-white border border-orange-200 rounded-xl shadow-xl max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2">
+                                <div
+                                    className="absolute z-50 w-full mt-1 bg-white border border-orange-200 rounded-xl shadow-xl max-h-60 overflow-y-auto animate-in fade-in slide-in-from-top-2"
+                                    onMouseDown={(e) => e.preventDefault()} // CRITICAL: Prevent input blur when clicking results
+                                >
                                     {branches
                                         .filter(branch => {
                                             const search = branchSearch.toLowerCase()
@@ -418,7 +421,7 @@ function ReviewForm() {
                                             <button
                                                 key={branch.id}
                                                 type="button"
-                                                className="w-full text-left px-4 py-3 hover:bg-orange-50 transition-colors border-b border-orange-50 last:border-0"
+                                                className="w-full text-left px-4 py-3 hover:bg-orange-50 active:bg-orange-100 transition-colors border-b border-orange-50 last:border-0 touch-manipulation"
                                                 onClick={() => {
                                                     setFormData({ ...formData, branchId: branch.id })
                                                     setBranchSearch(branch.name)
