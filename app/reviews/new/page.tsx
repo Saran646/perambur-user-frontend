@@ -230,14 +230,18 @@ function ReviewForm() {
 
     const getQuestionLabel = (key: string) => {
         const isDelivery = formData.visitType === 'DELIVERY'
+        const isTakeaway = formData.visitType === 'TAKEAWAY'
+        const isOffSite = isDelivery || isTakeaway
 
         switch (key) {
             case 'serviceRating':
                 return isDelivery ? 'Delivery Time & Service' : 'Service'
             case 'ambienceRating':
-                return isDelivery ? 'Packaging Quality' : 'Ambience & Atmosphere'
+                return isOffSite ? 'Packaging Quality' : 'Ambience & Atmosphere'
             case 'cleanlinessRating':
-                return isDelivery ? 'Food Hygiene' : 'Cleanliness'
+                return isOffSite ? 'Food Hygiene' : 'Cleanliness'
+            case 'valueRating':
+                return 'Value for Money' // Ensure consistency
             default:
                 return key.replace('Rating', '')
         }
@@ -494,9 +498,15 @@ function ReviewForm() {
                                     { key: 'tasteRating', label: 'Taste Quality' },
                                     { key: 'ambienceRating', label: getQuestionLabel('ambienceRating') },
                                     { key: 'cleanlinessRating', label: getQuestionLabel('cleanlinessRating') },
-                                    { key: 'valueRating', label: 'Value for Money' },
+                                    { key: 'valueRating', label: getQuestionLabel('valueRating') },
                                     { key: 'experienceRating', label: 'Experience' },
-                                ].map(({ key, label }) => (
+                                ].filter(item => {
+                                    // Remove service rating for Takeaway as per user design
+                                    if (formData.visitType === 'TAKEAWAY' && item.key === 'serviceRating') {
+                                        return false
+                                    }
+                                    return true
+                                }).map(({ key, label }) => (
                                     <div key={key} className="flex items-center justify-between">
                                         <span className="text-sm font-medium text-gray-700">{label}:</span>
                                         <EmojiRating
